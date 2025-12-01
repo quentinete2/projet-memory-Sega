@@ -1,0 +1,60 @@
+{
+  "themes": [
+    {
+      "id": "alphabet-scrabble",
+      "name": "Alphabet Scrabble",
+      "description": "Apprenez l'alphabet avec les lettres du scrabble",
+      "path": "ressources/alphabet-scrabble/",
+      "icon": "🔤"
+    },
+    {
+      "id": "animaux",
+      "name": "Animaux",
+      "description": "Découvrez les animaux du monde",
+      "path": "ressources/animaux/",
+      "icon": "🦁"
+    },
+    {
+      "id": "animaux-animes",
+      "name": "Animaux Animés",
+      "description": "Animaux avec des animations",
+      "path": "ressources/animauxAnimes/",
+      "icon": "🎨"
+    },
+    {
+      "id": "animaux-domestiques",
+      "name": "Animaux Domestiques",
+      "description": "Vos animaux de compagnie préférés",
+      "path": "ressources/animauxdomestiques/",
+      "icon": "🐾"
+    },
+    {
+      "id": "chiens",
+      "name": "Chiens",
+      "description": "Différentes races de chiens",
+      "path": "ressources/chiens/",
+      "icon": "🐕"
+    },
+    {
+      "id": "dinosaures",
+      "name": "Dinosaures",
+      "description": "Les dinosaures de la préhistoire",
+      "path": "ressources/dinosaures/",
+      "icon": "🦕"
+    },
+    {
+      "id": "dinosaures-avec-nom",
+      "name": "Dinosaures avec Nom",
+      "description": "Dinosaures avec leurs noms scientifiques",
+      "path": "ressources/dinosauresAvecNom/",
+      "icon": "🦖"
+    },
+    {
+      "id": "memory-legume",
+      "name": "Memory Légume",
+      "description": "Jeu de mémoire avec des légumes",
+      "path": "ressources/memory-legume/",
+      "icon": "🥕"
+    }
+  ]
+}

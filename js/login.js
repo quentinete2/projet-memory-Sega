@@ -11,7 +11,7 @@ document.getElementById('loginForm').addEventListener('submit', (e) => {
         messageDiv.textContent = result.message;
         messageDiv.style.color = 'green';
         setTimeout(() => {
-            window.location.href = 'index.html';
+            window.location.href = '../index.html';
         }, 500);
     } else {
         messageDiv.textContent = result.message;

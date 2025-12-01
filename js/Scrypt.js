@@ -38,9 +38,15 @@ function updateHeaderBar() {
                 window.location.href = 'index.html';
             }
         });
+        
+        // Afficher le bouton Play Game si on est sur la page d'accueil
+        const gameSection = document.getElementById('game-section');
+        if (gameSection) {
+            gameSection.style.display = 'block';
+        }
     } else {
         document.getElementById('loginButton').addEventListener('click', () => {
-            window.location.href = 'login.html';
+            window.location.href = 'html/login.html';
         });
     }   
 }
