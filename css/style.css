@@ -167,7 +167,7 @@ form input[type="password"]:focus {
 
 .container {
     flex: 1;
-    padding: 2rem;
+    padding: 1rem;
     max-width: 1200px;
     margin: 0 auto;
     width: 100%;
@@ -321,9 +321,9 @@ a:hover {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 2rem;
-    padding: 2rem;
+    padding: 1rem;
     max-width: 1200px;
-    margin: 2rem auto;
+    margin: 1rem auto;
     width: 100%;
 }
 
@@ -384,6 +384,12 @@ a:hover {
 
 .btn-play:active {
     transform: translateY(0);
+}
+.titre {
+    text-align: center; 
+    color: white; 
+    margin:0;
+    padding:0;
 }
 
 /* ============================================

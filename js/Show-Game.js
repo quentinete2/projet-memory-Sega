@@ -59,8 +59,10 @@ function startGame(themeId, themePath) {
         id: themeId,
         path: themePath
     }));
-
-    window.location.href = 'index.html';
+    
+    const currentPath = window.location.pathname;
+    const targetPath = currentPath.includes('/html/') ? 'game.html' : 'html/game.html';
+    window.location.href = targetPath;
 }
 
 document.addEventListener('DOMContentLoaded', loadThemes);

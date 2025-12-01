@@ -3,24 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sélectionner un Thème - Game Memory</title>
+    <title>Memory Game</title>
     <meta name="robots" content="noindex">
-    <link rel="icon" type="image/png" href="img/LogoGame_Memory.png" />
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" type="image/png" href="../img/LogoGame_Memory.png" />
+    <link rel="stylesheet" href="../css/style.css">
 </head>
 
 <body>
     <header class="header">
         <logo>
-            <img src="img/LogoGame_Memory.png" alt="Logo" class="logo-image">
+            <img src="../img/LogoGame_Memory.png" alt="Logo" class="logo-image">
         </logo>
         <h1>Game Memory</h1>
         <div class="header-bar"></div>
     </header>
 
     <div class="container">
-        <h2 style="text-align: center; color: white; margin-bottom: 1rem;">Choisissez votre thème</h2>
-        <div id="themes-game">
+        <div id="gameBoard" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; max-width: 600px; margin: 2rem auto;"></div>
+        <div id="gameStats" style="text-align: center; color: white; margin-top: 2rem;">
+            <p>Thème: <span id="themeName">Chargement...</span></p>
+            <p>Paires trouvées: <span id="pairsFound">0</span>/8</p>
+            <p>Tentatives: <span id="attempts">0</span></p>
+            <a href="game.html" style="text-decoration: none;">
+                <button class="connect" style="margin-top: 1rem;">← Retour aux thèmes</button>
+            </a>
         </div>
     </div>
 
@@ -29,7 +35,7 @@
     <template id="header-bar-connect-false">
         <div class="header-bar">
             <button id="loginButton" class="connect">Login</button>
-            <a href="html/register.html">
+            <a href="register.html">
                 <button id="registerButton" class="connect">Register</button>
             </a>
         </div>
@@ -46,7 +52,8 @@
         <button id="deleteAccountButton" class="connect">Delete Account</button>
     </template>
 
-    <script src="js/auth.js"></script>
-    <script src="js/Scrypt.js"></script>
+    <script src="../js/auth.js"></script>
+    <script src="../js/Scrypt.js"></script>
+    <script src="../js/game.js"></script>
 </body>
 </html>

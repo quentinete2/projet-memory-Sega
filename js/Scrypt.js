@@ -39,7 +39,6 @@ function updateHeaderBar() {
             }
         });
         
-        // Afficher le bouton Play Game si on est sur la page d'accueil
         const gameSection = document.getElementById('game-section');
         if (gameSection) {
             gameSection.style.display = 'block';
