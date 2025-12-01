@@ -3,12 +3,11 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Register - Game Memory</title>
+	<title>Login - Game Memory</title>
 	<meta name="robots" content="noindex">
 	<link rel="icon" type="image/png" href="logo.png" />
 	<link rel="stylesheet" href="style.css">
 </head>
-
 <body>
     <header class="header">
         <logo>
@@ -20,26 +19,22 @@
         </a>
     </header>
 
-    <h2>Create Account</h2>
-    <form id="registerForm">
+    <h2>Login</h2>
+    <form id="loginForm">
         <label for="username">Username:</label>
-        <input type="text" id="username" placeholder="Your username" required />
-
-        <label for="email">Email:</label>
-        <input type="email" id="email" placeholder="Your email" required />
-
+        <input type="text" id="username" name="username" required />
+        
         <label for="password">Password:</label>
-        <input type="password" id="password" placeholder="Your password" required />
-
-        <input type="submit" value="Register">
+        <input type="password" id="password" name="password" required />
+        
+        <input type="submit" value="Login">
     </form>
-
-    <p>Already have an account? <a href="login.html">Login here</a></p>
+    <p>Don't have an account? <a href="register.html">Register here</a></p>
     <div id="message"></div>
 
     <footer class="footer"></footer>
 
     <script src="auth.js"></script>
-    <script src="register.js"></script>
+    <script src="login.js"></script>
 </body>
 </html>

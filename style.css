@@ -1,30 +1,314 @@
-body {
-    font-family: Arial, sans-serif;
+/* ============================================
+   RESET & BASE STYLES
+   ============================================ */
+
+* {
     margin: 0;
     padding: 0;
-    background-color: #f4f4f4;
+    box-sizing: border-box;
 }
 
-.header {
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: #333;
+    line-height: 1.6;
+    min-height: 100vh;
     display: flex;
-    background-color: #35424a;
-    color: #ffffff;
-    padding: 20px 0;
-    align-items: flex-end;
-
+    flex-direction: column;
 }
 
-.logo-image {
+/* ============================================
+   HEADER STYLES
+   ============================================ */
+
+header.header {
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 1.5rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+header.header logo {
+    display: flex;
+    align-items: center;
+}
+
+header.header .logo-image {
     height: 50px;
-    vertical-align: middle;
+    width: auto;
+    margin-right: 1rem;
 }
 
-.footer {
-    background-color: #0d8fe0;
-    color: #ffffff;
-    text-align: center;
-    padding: 10px 0;
-    position: fixed;
+header.header h1 {
+    font-size: 2rem;
+    font-weight: bold;
+    flex-grow: 1;
+}
+
+.header-bar {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+/* ============================================
+   BUTTON STYLES
+   ============================================ */
+
+button, input[type="submit"] {
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 600;
+}
+
+button.connect, 
+#loginButton, 
+#registerButton, 
+#logoutButton,
+#homeButton {
+    background-color: #667eea;
+    color: white;
+    text-decoration: none;
+}
+
+button.connect:hover,
+#loginButton:hover,
+#registerButton:hover,
+#logoutButton:hover,
+#homeButton:hover {
+    background-color: #764ba2;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+button.connect:active,
+#loginButton:active,
+#registerButton:active,
+#logoutButton:active,
+#homeButton:active {
+    transform: translateY(0);
+}
+
+input[type="submit"] {
+    background-color: #667eea;
+    color: white;
+    margin-top: 1rem;
     width: 100%;
-    bottom: 0;
+}
+
+input[type="submit"]:hover {
+    background-color: #764ba2;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* ============================================
+   FORM STYLES
+   ============================================ */
+
+form {
+    background: white;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    max-width: 400px;
+    margin: 2rem auto;
+}
+
+form label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #333;
+    font-weight: 600;
+    margin-top: 1rem;
+}
+
+form label:first-of-type {
+    margin-top: 0;
+}
+
+form input[type="text"],
+form input[type="email"],
+form input[type="password"] {
+    width: 100%;
+    padding: 0.75rem;
+    border: 2px solid #e0e0e0;
+    border-radius: 5px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+    margin-bottom: 0.5rem;
+}
+
+form input[type="text"]:focus,
+form input[type="email"]:focus,
+form input[type="password"]:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+/* ============================================
+   CONTAINER & LAYOUT
+   ============================================ */
+
+.container {
+    flex: 1;
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+/* ============================================
+   FOOTER STYLES
+   ============================================ */
+
+footer.footer {
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    text-align: center;
+    padding: 1.5rem;
+    margin-top: auto;
+    box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.3);
+}
+
+/* ============================================
+   TEXT & LINK STYLES
+   ============================================ */
+
+h2 {
+    text-align: center;
+    color: white;
+    margin-bottom: 2rem;
+    font-size: 2rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+p {
+    text-align: center;
+    color: white;
+    margin-top: 1rem;
+}
+
+a {
+    color: #667eea;
+    text-decoration: none;
+    transition: color 0.3s ease;
+    font-weight: 600;
+}
+
+a:hover {
+    color: #764ba2;
+    text-decoration: underline;
+}
+
+/* ============================================
+   MESSAGE STYLES
+   ============================================ */
+
+#message {
+    text-align: center;
+    margin-top: 1rem;
+    padding: 0.75rem;
+    border-radius: 5px;
+    font-weight: 600;
+    min-height: 1.5rem;
+}
+
+#message:empty {
+    display: none;
+}
+
+/* ============================================
+   WELCOME MESSAGE
+   ============================================ */
+
+#welcomeMessage {
+    color: white;
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+/* ============================================
+   LOGIN CONTAINER
+   ============================================ */
+
+.login-container {
+    background: white;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    max-width: 400px;
+    margin: 2rem auto;
+}
+
+/* ============================================
+   RESPONSIVE DESIGN
+   ============================================ */
+
+@media (max-width: 768px) {
+    header.header {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    header.header h1 {
+        font-size: 1.5rem;
+    }
+
+    .header-bar {
+        width: 100%;
+        justify-content: center;
+    }
+
+    form {
+        margin: 1rem;
+    }
+
+    h2 {
+        font-size: 1.5rem;
+    }
+
+    button, input[type="submit"] {
+        padding: 0.6rem 1.2rem;
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 480px) {
+    header.header {
+        padding: 1rem;
+    }
+
+    header.header h1 {
+        font-size: 1.2rem;
+    }
+
+    form {
+        padding: 1.5rem;
+        max-width: 100%;
+    }
+
+    .header-bar {
+        gap: 0.5rem;
+    }
+
+    button, input[type="submit"] {
+        padding: 0.5rem 1rem;
+        font-size: 0.85rem;
+    }
 }

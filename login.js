@@ -1,19 +1,17 @@
-document.getElementById('registerForm').addEventListener('submit', (e) => {
+document.getElementById('loginForm').addEventListener('submit', (e) => {
     e.preventDefault();
     
     const username = document.getElementById('username').value;
-    const email = document.getElementById('email').value;
     const password = document.getElementById('password').value;
     
-    const result = auth.register(username, email, password);
+    const result = auth.login(username, password);
     
     const messageDiv = document.getElementById('message');
     if (result.success) {
         messageDiv.textContent = result.message;
         messageDiv.style.color = 'green';
-        document.getElementById('registerForm').reset();
         setTimeout(() => {
-            window.location.href = 'login.html';
+            window.location.href = 'index.html';
         }, 500);
     } else {
         messageDiv.textContent = result.message;

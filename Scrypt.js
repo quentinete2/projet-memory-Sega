@@ -1,37 +1,27 @@
-let connect = false;
-
 function updateHeaderBar() {
     const header = document.querySelector('header');
     const existingBar = document.querySelector('.header-bar');
     if (existingBar) {
         existingBar.remove();
     }   
-    let templateId = connect ? 'header-bar-connect-true' : 'header-bar-connect-false';
+    
+    const isLoggedIn = auth.isLoggedIn();
+    let templateId = isLoggedIn ? 'header-bar-connect-true' : 'header-bar-connect-false';
     const template = document.getElementById(templateId);
     const headerBar = template.content.cloneNode(true);
     header.appendChild(headerBar);
-    if (connect) {
+    
+    if (isLoggedIn) {
+        const username = auth.getCurrentUser();
+        document.getElementById('welcomeMessage').textContent = `Welcome, ${username}!`;
         document.getElementById('logoutButton').addEventListener('click', () => {
-            connect = false;
+            auth.logout();
             updateHeaderBar();
+            window.location.href = 'index.html';
         });
     } else {
         document.getElementById('loginButton').addEventListener('click', () => {
-            let templateId = 'Login';
-            const template = document.getElementById(templateId);
-            const loginForm = template.content.cloneNode(true);
-            document.body.appendChild(loginForm);
-            document.querySelector('.header-bar').remove();
-
-            if (document.getElementById('closeLogin')) {
-                document.getElementById('closeLogin').addEventListener('click', () => {
-                    document.querySelector('.login-container').remove();
-                });
-            }
-        });
-        document.getElementById('registerButton').addEventListener('click', () => {
-            connect = none;
-            updateHeaderBar();
+            window.location.href = 'login.html';
         });
     }   
 }
