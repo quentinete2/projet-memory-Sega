@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Jeux</title>
+	<meta name="robots" content="noindex">
+	<link rel="icon" type="image/png" href="logo.png" />
+	<link rel="stylesheet" href="style.css">
+</head>
+
+<body id="body">
+    
+    <header class="header">
+        <logo>
+            <img src="LogoGame_Memory.png" alt="Logo" class="logo-image ">
+        </logo>
+        <h1> Game Memory</h1>
+        <div class="header-bar">
+    </div>
+    </header>
+
+	<div class="container">
+
+	</div>
+
+    <footer class="footer">
+        
+    </footer>
+
+	<script src="Scrypt.js"></script>
+</body>
+
+<template id="header-bar-connect-false"
+    ><div class="header-bar">
+        <button id="loginButton" class="connect">Login</button>
+        <a href="register.html">
+            <button id="registerButton" class="connect">Register</button>
+        </a>
+    </div>
+</template>
+
+<template id="header-bar-connect-true" 
+    ><div class="header-bar">
+        <span id="welcomeMessage">Welcome, User!</span>
+        <button id="logoutButton" class="connect">Logout</button>
+    </div>
+</template>
+
+<template id="Login"
+    ><div class="login-container">
+        <h2>Login</h2>
+        <form id="loginForm">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required />
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required />
+            <button type="submit">Login</button>
+        </form>
+    </div>
+</template>
+
+</html>

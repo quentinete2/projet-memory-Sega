@@ -1,0 +1,82 @@
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #6a11cb, #2575fc);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card {
+    background: white;
+    padding: 40px;
+    width: 380px;
+    border-radius: 20px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 25px;
+    color: #333;
+}
+
+.input-group {
+    margin-bottom: 20px;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 14px;
+    color: #555;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    font-size: 15px;
+    transition: 0.2s;
+}
+
+.input-group input:focus {
+    border-color: #6a11cb;
+    outline: none;
+}
+
+.btn {
+    width: 100%;
+    background: #6a11cb;
+    color: white;
+    padding: 14px;
+    border: none;
+    border-radius: 12px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.btn:hover {
+    background: #5b0fb3;
+}
+
+.login-link {
+    margin-top: 15px;
+    text-align: center;
+    font-size: 14px;
+    color: #333;
+}
+
+.login-link a {
+    color: #2575fc;
+    text-decoration: none;
+}
+
+.login-link a:hover {
+    text-decoration: underline;
+}
