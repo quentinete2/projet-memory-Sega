@@ -128,7 +128,9 @@ function checkMatch() {
     if (pairsFound === cards.length / 2) {
         setTimeout(() => {
             alert(`Félicitations ! Vous avez gagné en ${attempts} tentatives !`);
-
+            if (attempts > 100) {
+                alert("Vous êtes vraiment nulle en mémoire !Aller dormir un peu !");
+            }
             const username = auth.getCurrentUser();
             if (username) {
                 saveScore(selectedTheme.id, username, attempts);
