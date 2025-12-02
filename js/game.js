@@ -208,13 +208,16 @@ document.addEventListener('DOMContentLoaded', () => {
 function displayScoreboard(themeId) {
     const scoreboards = JSON.parse(localStorage.getItem('scoreboards')) || {};
     const scores = scoreboards[themeId] || [];
+    scores.sort((a, b) => a.attempts - b.attempts);
+    const topScores = scores.slice(0, 10);
+
     const tableBody = document.getElementById('scoreTableBody');
     const themeTitle = document.getElementById('themeTitle');
 
     themeTitle.textContent = themeId;
     tableBody.innerHTML = '';
 
-    if (scores.length === 0) {
+    if (topScores.length === 0) {
         const row = document.createElement('tr');
         const cell = document.createElement('td');
         cell.colSpan = 4;
@@ -224,7 +227,7 @@ function displayScoreboard(themeId) {
         return;
     }
 
-    scores.forEach((entry, index) => {
+    topScores.forEach((entry, index) => {
         const row = document.createElement('tr');
         row.innerHTML = `
             <td>${index + 1}</td>
@@ -235,17 +238,20 @@ function displayScoreboard(themeId) {
         tableBody.appendChild(row);
     });
 }
+
 function displayPersonalScoreboard(themeId, username) {
     const scoreboards = JSON.parse(localStorage.getItem('scoreboards')) || {};
     const scores = scoreboards[themeId] || [];
     const personalScores = scores.filter(entry => entry.user === username);
+    const topPersonal = personalScores.sort((a, b) => a.attempts - b.attempts).slice(0, 10);
+
     const tableBody = document.getElementById('personalScoreTableBody');
     const themeTitle = document.getElementById('personalThemeTitle');
 
     themeTitle.textContent = themeId;
     tableBody.innerHTML = '';
 
-    if (personalScores.length === 0) {
+    if (topPersonal.length === 0) {
         const row = document.createElement('tr');
         const cell = document.createElement('td');
         cell.colSpan = 3;
@@ -255,7 +261,7 @@ function displayPersonalScoreboard(themeId, username) {
         return;
     }
 
-    personalScores.forEach((entry, index) => {
+    topPersonal.forEach((entry, index) => {
         const row = document.createElement('tr');
         row.innerHTML = `
             <td>${index + 1}</td>
@@ -265,6 +271,7 @@ function displayPersonalScoreboard(themeId, username) {
         tableBody.appendChild(row);
     });
 }
+
 
 document.addEventListener('DOMContentLoaded', () => {
     const selectedTheme = JSON.parse(localStorage.getItem('selectedTheme'));
