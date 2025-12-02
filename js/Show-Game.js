@@ -72,11 +72,11 @@ function createThemeCard(theme) {
 
             if (isNaN(maxPairs) || maxPairs < 1) {
                 const maxPairs = 30;
-                addFavorite(theme.id, maxPairs);
+                addFavorite(theme.id, theme.path, maxPairs);
                 displayFavorites();
             }
 
-            addFavorite(theme.id, maxPairs);
+            addFavorite(theme.id, theme.path, maxPairs);
             displayFavorites();
         });
 
@@ -90,7 +90,7 @@ function createThemeCard(theme) {
 }
 
 
-function addFavorite(themeId, maxPairs) {
+function addFavorite(themeId, themePath, maxPairs ) {
     const username = auth.getCurrentUser();
     if (!username) {
         alert("Vous devez être connecté pour ajouter un favori !");
@@ -107,11 +107,13 @@ function addFavorite(themeId, maxPairs) {
 
     if (existing) {
         existing.maxPairs = maxPairs;
+        existing.path = themePath;
         existing.date = new Date().toISOString();
     } else {
         favorites[username].push({
             themeId,
             maxPairs,
+            path: themePath,
             date: new Date().toISOString()
         });
     }
@@ -119,10 +121,7 @@ function addFavorite(themeId, maxPairs) {
     localStorage.setItem('favorites', JSON.stringify(favorites));
     alert("Thème ajouté à vos favoris !");
 }
-document.addEventListener("DOMContentLoaded", () => {
-    loadThemes();
-    displayFavorites();
-});
+
 
 function removeFavorite(themeId) {
     const username = auth.getCurrentUser();
@@ -155,16 +154,24 @@ function displayFavorites() {
     userFavs.forEach(fav => {
         const div = document.createElement('div');
         div.className = "fav-card";
+
         div.innerHTML = `
-            <h4 class="theme-icon" >${fav.themeId}</h4>
-            <p class="description" >Max paires : ${fav.maxPairs}</p>
-            <button class="btn-play" onclick="launchFavorite('${fav.themeId}', ${fav.maxPairs})">
-                Jouer ⭐
-            </button>
-            <button class="btn-remove" onclick="removeFavorite('${fav.themeId}')">
-                Supprimer ❌
-            </button>
+            <h4 class="theme-icon">${fav.themeId}</h4>
+            <p class="description">Max paires : ${fav.maxPairs}</p>
+            <button class="btn-play">Jouer ⭐</button>
+            <button class="btn-remove">Supprimer ❌</button>
         `;
+
+        const playBtn = div.querySelector('.btn-play');
+        playBtn.addEventListener('click', () => {
+            startGame(fav.themeId, fav.path, fav.maxPairs);
+        });
+
+        const removeBtn = div.querySelector('.btn-remove');
+        removeBtn.addEventListener('click', () => {
+            removeFavorite(fav.themeId);
+        });
+
         container.appendChild(div);
     });
 }
@@ -182,4 +189,7 @@ function startGame(themeId, themePath, maxPairs) {
 }
 
 
-document.addEventListener('DOMContentLoaded', loadThemes);
+document.addEventListener("DOMContentLoaded", () => {
+    loadThemes();
+    displayFavorites();
+});
