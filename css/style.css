@@ -208,15 +208,6 @@ a:hover { color: #764ba2; text-decoration: underline; }
     transform: translateY(-2px);
 }
 
-/* GAME BOARD */
-.game-board {
-    display: grid;
-    grid-template-columns: repeat(4, 120px);
-    gap: 20px;
-    justify-content: center;
-    margin-top: 40px;
-}
-
 .card {
     width: 120px;
     height: 120px;
@@ -263,6 +254,44 @@ a:hover { color: #764ba2; text-decoration: underline; }
     border-radius: 12px;
     object-fit: cover;
 }
+
+.scoreboard-container {
+    width: 90%;
+    max-width: 600px;
+    margin: 2rem auto;
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 1.5rem;
+    border-radius: 12px;
+    color: #fff;
+    text-align: center;
+    box-shadow: 0 0 15px rgba(0,0,0,0.5);
+}
+
+.scoreTable {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+}
+
+.scoreTable th, #scoreTable td {
+    padding: 0.8rem;
+    border-bottom: 1px solid #ccc;
+}
+
+.scoreTable th {
+    background-color: #444;
+    color: #fff;
+}
+
+.scoreTable tr:nth-child(even) {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.scoreTable tr:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+
 
 /* MEDIA QUERIES */
 @media (max-width: 768px) {

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Game Memory</title>
+	<meta name="robots" content="noindex">
+	<link rel="icon" type="image/png" href="../img/LogoGame_Memory.png" />
+	<link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body id="body">
+    
+    <header class="header">
+        <logo>
+            <img src="img/LogoGame_Memory.png" alt="Logo" class="logo-image">
+        </logo>
+        <h1>Game Memory</h1>
+        <div class="header-bar"></div>
+    </header>
+
+    <div id="scoreboard-container" class="scoreboard-container" class="scoreTable">
+        <h2>Scoreboard - <span id="themeTitle" class="scoreTable"></span></h2>
+        <table id="scoreTable" class="scoreTable">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Joueur</th>
+                    <th>Tentatives</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+            <tbody id="scoreTableBody" class="scoreTable">
+            </tbody>
+        </table>
+    </div>
+
+    <div id="personal-scoreboard-container" class="scoreboard-container" class="scoreTable">
+        <h2>Mes scores - <span id="personalThemeTitle" class="scoreTable"></span></h2>
+        <table id="personalScoreTable" class="scoreTable">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Tentatives</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+            <tbody id="personalScoreTableBody" class="scoreTable">
+            </tbody>
+        </table>
+    </div>
+
+    <div class="container2">
+        <div id="gameStats" style="text-align: center; color: white; margin-top: 2rem;">
+            <a href="#null" onclick="javascript:history.back();">
+                <button class="connect"  style="margin-top: 1rem; margin-bottom: 2rem;">← Retour aux jeux</button>
+            </a>
+        </div>
+    </div>
+
+
+    <footer class="footer"></footer>
+
+    <template id="header-bar-connect-false">
+        <div class="header-bar">
+            <a href="login.html">
+                <button id="loginButton" class="connect">Login</button>
+            </a>
+            <a href="register.html">
+                <button id="registerButton" class="connect">Register</button>
+            </a>
+        </div>
+    </template>
+
+    <template id="header-bar-connect-true">
+        <div class="header-bar">
+            <span id="welcomeMessage">Welcome, User!</span>
+            <a href="..\index.html">
+                <button id="logoutButton" class="connect">Logout</button>
+            </a>
+        </div>
+    </template>
+
+    <template id="delete-acount">
+        <button id="deleteAccountButton" class="connect">Delete Account</button>
+    </template>
+    
+    <template id="card-template">
+        <div class="card">
+            <div class="card-inner">
+                <div class="card-front">
+                </div>
+                <div class="card-back">
+                    <img class="card-img" />
+                </div>
+            </div>
+        </div>
+    </template>
+
+	<script src="../js/auth.js"></script>
+	<script src="../js/Scrypt.js"></script>
+    <script src="../js/game.js"></script>
+</body>
+</html>

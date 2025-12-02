@@ -25,6 +25,7 @@ async function initGame() {
     console.log(countImg);
     shuffleCards();
     console.log(array);
+    updateGrid();
     displaycards();
 }
 
@@ -123,8 +124,21 @@ function checkMatch() {
         first.card.matched = true;
         second.card.matched = true;
         pairsFound++;
-    } 
-    else {
+
+    if (pairsFound === cards.length / 2) {
+        setTimeout(() => {
+            alert(`Félicitations ! Vous avez gagné en ${attempts} tentatives !`);
+
+            const username = auth.getCurrentUser();
+            if (username) {
+                saveScore(selectedTheme.id, username, attempts);
+            }
+
+            window.location.reload();
+        }, 300);
+    }
+
+    } else {
         first.element.classList.remove("flipped");
         second.element.classList.remove("flipped");
 
@@ -134,6 +148,132 @@ function checkMatch() {
 
     flippedCards = [];
 }
+
+function updateGrid() {
+    const board = document.getElementById('gameBoard');
+    const totalCards = array.length;
+
+    const columns = Math.ceil(Math.sqrt(totalCards));
+
+    board.style.gridTemplateColumns = `repeat(${columns}, 1fr)`;
+}
+
+
+function saveScore(themeId, username, attempts) {
+    let scoreboards = JSON.parse(localStorage.getItem('scoreboards')) || {};
+
+    if (!scoreboards[themeId]) {
+        scoreboards[themeId] = [];
+    }
+
+    scoreboards[themeId].push({
+        user: username,
+        attempts: attempts,
+        date: new Date().toISOString()
+    });
+
+    scoreboards[themeId].sort((a, b) => a.attempts - b.attempts);
+
+    localStorage.setItem('scoreboards', JSON.stringify(scoreboards));
+}
+
+function displayScoreboard(themeId) {
+    const scoreboards = JSON.parse(localStorage.getItem('scoreboards')) || {};
+    const scores = scoreboards[themeId] || [];
+    const scoreList = document.getElementById('scoreList');
+    const themeTitle = document.getElementById('themeTitle');
+
+    themeTitle.textContent = themeId;
+    scoreList.innerHTML = '';
+
+    if (scores.length === 0) {
+        scoreList.innerHTML = '<li>Aucun score pour ce thème</li>';
+        return;
+    }
+
+    scores.forEach((entry, index) => {
+        const li = document.createElement('li');
+        li.textContent = `${index + 1}. ${entry.user} - ${entry.attempts} tentatives (${new Date(entry.date).toLocaleDateString()})`;
+        scoreList.appendChild(li);
+    });
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    const selectedTheme = JSON.parse(localStorage.getItem('selectedTheme'));
+    if (selectedTheme) {
+        displayScoreboard(selectedTheme.id);
+    }
+});
+
+function displayScoreboard(themeId) {
+    const scoreboards = JSON.parse(localStorage.getItem('scoreboards')) || {};
+    const scores = scoreboards[themeId] || [];
+    const tableBody = document.getElementById('scoreTableBody');
+    const themeTitle = document.getElementById('themeTitle');
+
+    themeTitle.textContent = themeId;
+    tableBody.innerHTML = '';
+
+    if (scores.length === 0) {
+        const row = document.createElement('tr');
+        const cell = document.createElement('td');
+        cell.colSpan = 4;
+        cell.textContent = 'Aucun score pour ce thème';
+        row.appendChild(cell);
+        tableBody.appendChild(row);
+        return;
+    }
+
+    scores.forEach((entry, index) => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td>${index + 1}</td>
+            <td>${entry.user}</td>
+            <td>${entry.attempts}</td>
+            <td>${new Date(entry.date).toLocaleDateString()}</td>
+        `;
+        tableBody.appendChild(row);
+    });
+}
+function displayPersonalScoreboard(themeId, username) {
+    const scoreboards = JSON.parse(localStorage.getItem('scoreboards')) || {};
+    const scores = scoreboards[themeId] || [];
+    const personalScores = scores.filter(entry => entry.user === username);
+    const tableBody = document.getElementById('personalScoreTableBody');
+    const themeTitle = document.getElementById('personalThemeTitle');
+
+    themeTitle.textContent = themeId;
+    tableBody.innerHTML = '';
+
+    if (personalScores.length === 0) {
+        const row = document.createElement('tr');
+        const cell = document.createElement('td');
+        cell.colSpan = 3;
+        cell.textContent = 'Aucun score pour ce thème';
+        row.appendChild(cell);
+        tableBody.appendChild(row);
+        return;
+    }
+
+    personalScores.forEach((entry, index) => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td>${index + 1}</td>
+            <td>${entry.attempts}</td>
+            <td>${new Date(entry.date).toLocaleDateString()}</td>
+        `;
+        tableBody.appendChild(row);
+    });
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    const selectedTheme = JSON.parse(localStorage.getItem('selectedTheme'));
+    const username = auth.getCurrentUser();
+    if (selectedTheme && username) {
+        displayScoreboard(selectedTheme.id);
+        displayPersonalScoreboard(selectedTheme.id, username);
+    }
+});
 
 
 
