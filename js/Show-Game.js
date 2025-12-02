@@ -1,3 +1,5 @@
+isLoggedIn = auth.isLoggedIn();
+
 async function loadThemes() {
     try {
         const response = await fetch('themes.json');
@@ -42,13 +44,18 @@ function createThemeCard(theme) {
             Jouer
         </button>
     `;
-
     const playButton = card.querySelector('.btn-play');
-    playButton.addEventListener('click', () => {
-        startGame(theme.id, theme.path);
-    });
-    
-    return card;
+    if (isLoggedIn) {
+        playButton.addEventListener('click', () => {
+            startGame(theme.id, theme.path);
+        });
+        
+        return card;
+    } else {
+        playButton.disabled = true;
+        playButton.textContent = 'Connectez-vous pour jouer';
+        return card;
+    }
 }
 
 function startGame(themeId, themePath) {

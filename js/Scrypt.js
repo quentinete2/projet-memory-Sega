@@ -35,7 +35,6 @@ function updateHeaderBar() {
                 auth.logout();
                 updateHeaderBar();
                 alert('Your account has been deleted.');
-                window.location.href = 'index.html';
             }
         });
         
@@ -45,7 +44,6 @@ function updateHeaderBar() {
         }
     } else {
         document.getElementById('loginButton').addEventListener('click', () => {
-            window.location.href = 'html/login.html';
         });
     }   
 }

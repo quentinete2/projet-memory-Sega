@@ -20,6 +20,9 @@
 
     <div class="container">
         <div id="gameBoard" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; max-width: 600px; margin: 2rem auto;"></div>
+    </div>
+
+    <div class="container2">
         <div id="gameStats" style="text-align: center; color: white; margin-top: 2rem;">
             <p>Thème: <span id="themeName">Chargement...</span></p>
             <p>Tentatives: <span id="attempts">0</span></p>
@@ -33,7 +36,9 @@
 
     <template id="header-bar-connect-false">
         <div class="header-bar">
-            <button id="loginButton" class="connect">Login</button>
+            <a href="login.html">
+                <button id="loginButton" class="connect">Login</button>
+            </a>
             <a href="register.html">
                 <button id="registerButton" class="connect">Register</button>
             </a>
@@ -43,7 +48,9 @@
     <template id="header-bar-connect-true">
         <div class="header-bar">
             <span id="welcomeMessage">Welcome, User!</span>
-            <button id="logoutButton" class="connect">Logout</button>
+            <a href="..\index.html">
+                <button id="logoutButton" class="connect">Logout</button>
+            </a>
         </div>
     </template>
 
