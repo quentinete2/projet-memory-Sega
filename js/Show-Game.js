@@ -39,37 +39,147 @@ function createThemeCard(theme) {
     card.innerHTML = `
         <div class="theme-icon">${theme.icon}</div>
         <h3>${theme.name}</h3>
-        <p>${theme.description}</p>
+        <p class="description">${theme.description}</p>
+
         <button class="btn-play" data-theme-id="${theme.id}" data-theme-path="${theme.path}">
             Jouer
         </button>
+
+        <P2>Nombre de Paire Max</P2>
+        <input type="text" class="inputMax"/>
+
+        <button class="btn-fav">Ajouter aux favoris ⭐</button>
     `;
+
     const playButton = card.querySelector('.btn-play');
+    const favButton = card.querySelector('.btn-fav');
+    const inputMax = card.querySelector('.inputMax');
+
     if (isLoggedIn) {
+
         playButton.addEventListener('click', () => {
-            startGame(theme.id, theme.path);
+            const maxPairs = parseInt(inputMax.value);
+            if (isNaN(maxPairs) || maxPairs < 1) {
+                const maxPairs = 30;
+                startGame(theme.id, theme.path, maxPairs);
+            } else {
+            startGame(theme.id, theme.path, maxPairs);
+            }
         });
-        
-        return card;
+
+        favButton.addEventListener('click', () => {
+            const maxPairs = parseInt(inputMax.value);
+
+            if (isNaN(maxPairs) || maxPairs < 1) {
+                const maxPairs = 30;
+                addFavorite(theme.id, maxPairs);
+                displayFavorites();
+            }
+
+            addFavorite(theme.id, maxPairs);
+            displayFavorites();
+        });
+
     } else {
         playButton.disabled = true;
         playButton.textContent = 'Connectez-vous pour jouer';
-        return card;
+        favButton.disabled = true;
     }
+
+    return card;
 }
 
-function startGame(themeId, themePath) {
-    console.log(`Démarrage du jeu avec le thème: ${themeId}`);
-    console.log(`Chemin des ressources: ${themePath}`);
 
+function addFavorite(themeId, maxPairs) {
+    const username = auth.getCurrentUser();
+    if (!username) {
+        alert("Vous devez être connecté pour ajouter un favori !");
+        return;
+    }
+
+    let favorites = JSON.parse(localStorage.getItem('favorites')) || {};
+
+    if (!favorites[username]) {
+        favorites[username] = [];
+    }
+
+    const existing = favorites[username].find(f => f.themeId === themeId);
+
+    if (existing) {
+        existing.maxPairs = maxPairs;
+        existing.date = new Date().toISOString();
+    } else {
+        favorites[username].push({
+            themeId,
+            maxPairs,
+            date: new Date().toISOString()
+        });
+    }
+
+    localStorage.setItem('favorites', JSON.stringify(favorites));
+    alert("Thème ajouté à vos favoris !");
+}
+document.addEventListener("DOMContentLoaded", () => {
+    loadThemes();
+    displayFavorites();
+});
+
+function removeFavorite(themeId) {
+    const username = auth.getCurrentUser();
+    if (!username) return;
+
+    let favorites = JSON.parse(localStorage.getItem('favorites')) || {};
+    if (!favorites[username]) return;
+
+    favorites[username] = favorites[username].filter(f => f.themeId !== themeId);
+    localStorage.setItem('favorites', JSON.stringify(favorites));
+    
+    displayFavorites();
+}
+
+function displayFavorites() {
+    const username = auth.getCurrentUser();
+    if (!username) return;
+
+    const favorites = JSON.parse(localStorage.getItem('favorites')) || {};
+    const userFavs = favorites[username] || [];
+
+    const container = document.getElementById('favoriteList2');
+    container.innerHTML = '';
+
+    if (userFavs.length === 0) {
+        container.innerHTML = "<p>Aucun favori pour l'instant.</p>";
+        return;
+    }
+
+    userFavs.forEach(fav => {
+        const div = document.createElement('div');
+        div.className = "fav-card";
+        div.innerHTML = `
+            <h4 class="theme-icon" >${fav.themeId}</h4>
+            <p class="description" >Max paires : ${fav.maxPairs}</p>
+            <button class="btn-play" onclick="launchFavorite('${fav.themeId}', ${fav.maxPairs})">
+                Jouer ⭐
+            </button>
+            <button class="btn-remove" onclick="removeFavorite('${fav.themeId}')">
+                Supprimer ❌
+            </button>
+        `;
+        container.appendChild(div);
+    });
+}
+
+function startGame(themeId, themePath, maxPairs) {
     localStorage.setItem('selectedTheme', JSON.stringify({
         id: themeId,
-        path: themePath
+        path: themePath,
+        maxPairs: maxPairs
     }));
-    
+
     const currentPath = window.location.pathname;
     const targetPath = currentPath.includes('/html/') ? 'game.html' : 'html/game.html';
     window.location.href = targetPath;
 }
+
 
 document.addEventListener('DOMContentLoaded', loadThemes);

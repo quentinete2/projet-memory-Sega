@@ -10,6 +10,7 @@ let sucsess = false;
 let Nb_img = 0;
 let imageExtensions = {};
 let countImg = [];
+let Max = 0;
 
 async function initGame() {
     if (!selectedTheme) {
@@ -21,10 +22,8 @@ async function initGame() {
     document.getElementById('themeName').textContent = selectedTheme.id;
     await Number_Images();
     setupCards();
-    console.log(cards);
-    console.log(countImg);
     shuffleCards();
-    console.log(array);
+    console.log("array", array);
     updateGrid();
     displaycards();
 }
@@ -45,11 +44,9 @@ async function Number_Images() {
                     countImg.push(i);
                     found = true;
                     imageExtensions[i] = ext;
-                    console.log(`Image ${i}${ext} trouvée`);
                     break;
                 }
-            } catch (error) {
-
+            } catch (error) {        
             }
         }
     }
@@ -59,14 +56,30 @@ async function Number_Images() {
 }
 
 function setupCards() {
-    cards = [];
-    for (let i of countImg) {
-        const ext = imageExtensions[i] || '.png';
-        const card1 = { id: i, img: `../${selectedTheme.path}${i}${ext}`, flipped: false, matched: false };
-        cards.push({ ...card1 }, { ...card1 });
+    const themeData = JSON.parse(localStorage.getItem('selectedTheme'));
+    let Max = parseInt(themeData.maxPairs*2);
+    console.log("Max from themeData:", Max);
 
+    const limitedImages = countImg.slice(0, Max);
+    console.log("limitedImages:", limitedImages);
+    console.log("countImg", countImg);
+
+
+    cards = [];
+    for (let i of limitedImages) {
+        const ext = imageExtensions[i] || '.png';
+
+        const card = { 
+            id: i, 
+            img: `../${selectedTheme.path}${i}${ext}`, 
+            flipped: false, 
+            matched: false 
+        };
+
+        cards.push({ ...card });
     }
-} 
+    console.log("cards", cards);
+}
 
 
 function shuffleCards() {
@@ -160,13 +173,10 @@ function updateGrid() {
     board.style.gridTemplateColumns = `repeat(${columns}, 1fr)`;
 }
 
-
 function saveScore(themeId, username, attempts) {
     let scoreboards = JSON.parse(localStorage.getItem('scoreboards')) || {};
 
-    if (!scoreboards[themeId]) {
-        scoreboards[themeId] = [];
-    }
+    if (!scoreboards[themeId]) scoreboards[themeId] = [];
 
     scoreboards[themeId].push({
         user: username,
@@ -174,10 +184,13 @@ function saveScore(themeId, username, attempts) {
         date: new Date().toISOString()
     });
 
-    scoreboards[themeId].sort((a, b) => a.attempts - b.attempts);
+    scoreboards[themeId] = scoreboards[themeId]
+        .sort((a, b) => a.attempts - b.attempts)
+        .slice(0, 10);
 
     localStorage.setItem('scoreboards', JSON.stringify(scoreboards));
 }
+
 
 function displayScoreboard(themeId) {
     const scoreboards = JSON.parse(localStorage.getItem('scoreboards')) || {};
@@ -199,13 +212,6 @@ function displayScoreboard(themeId) {
         scoreList.appendChild(li);
     });
 }
-
-document.addEventListener('DOMContentLoaded', () => {
-    const selectedTheme = JSON.parse(localStorage.getItem('selectedTheme'));
-    if (selectedTheme) {
-        displayScoreboard(selectedTheme.id);
-    }
-});
 
 function displayScoreboard(themeId) {
     const scoreboards = JSON.parse(localStorage.getItem('scoreboards')) || {};
@@ -274,12 +280,17 @@ function displayPersonalScoreboard(themeId, username) {
     });
 }
 
-
 document.addEventListener('DOMContentLoaded', () => {
+    initGame();
+
     const selectedTheme = JSON.parse(localStorage.getItem('selectedTheme'));
     const username = auth.getCurrentUser();
-    if (selectedTheme && username) {
+
+    if (selectedTheme) {
         displayScoreboard(selectedTheme.id);
+    }
+
+    if (selectedTheme && username) {
         displayPersonalScoreboard(selectedTheme.id, username);
     }
 });
