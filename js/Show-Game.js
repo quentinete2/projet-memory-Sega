@@ -71,7 +71,7 @@ function createThemeCard(theme) {
             const maxPairs = parseInt(inputMax.value);
 
             if (isNaN(maxPairs) || maxPairs < 1) {
-                const maxPairs = 30;
+                const maxPairs = 151;
                 addFavorite(theme.id, theme.path, maxPairs);
                 displayFavorites();
             }

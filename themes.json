@@ -1,6 +1,13 @@
 {
   "themes": [
     {
+      "id": "pokemon",
+      "name": "pokemon",
+      "description": "Trouveras-tu les 151 premiers pokémons ?",
+      "path": "ressources/pokemon/",
+      "icon": "🔤"
+    },
+    {
       "id": "alphabet-scrabble",
       "name": "Alphabet Scrabble",
       "description": "Apprenez l'alphabet avec les lettres du scrabble",
@@ -56,5 +63,6 @@
       "path": "ressources/memory-legume/",
       "icon": "🥕"
     }
+    
   ]
 }

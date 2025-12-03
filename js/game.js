@@ -33,7 +33,7 @@ async function Number_Images() {
     const extensions = ['.png', '.webp', '.svg', '.jpg', '.jpeg'];
     countImg = [];
     let count = 0;
-    for (let i = 1; i <= 30; i++) {
+    for (let i = 1; i <= 200; i++) {
         let found = false;
         for (const ext of extensions) {
             const imagePath = `${themePath}${i}${ext}`;
